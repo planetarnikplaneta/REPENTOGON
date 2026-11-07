@@ -28,10 +28,20 @@ jobs:
           
     - name: Configure CMake
       run: cmake -G "Visual Studio 17 2022" -A "Win32" -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-
+    
+    - name: Generate IsaacRepentance header
+      run: cmake --build build --config Release --target libzhl
+      
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-
+    
+    - name: Upload IsaacRepentance header
+      uses: actions/upload-artifact@v4
+      with:
+        name: IsaacRepentance-header
+        path: include/IsaacRepentance.h
+        if-no-files-found: error
+        
     - name: Create Artifact Folder
       shell: powershell
       run: |
