@@ -42,7 +42,15 @@ jobs:
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-
+    
+    - name: Upload IsaacRepentance header
+      uses: actions/upload-artifact@v4
+      with:
+        name: IsaacRepentance-header
+        path: include/IsaacRepentance.h
+        if-no-files-found: error
+        retention-days: 30
+        
     - name: Create Artifact Folder
       shell: powershell
       run: |
