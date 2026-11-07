@@ -31,6 +31,7 @@ jobs:
     
     - name: Generate IsaacRepentance header
       run: cmake --build build --config Release --target libzhl
+
       
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
